@@ -8,6 +8,19 @@ import (
 	"sort"
 )
 
+func IsImageNudeUrl(url string) (r bool, e error) {
+	img, err := loadImageFromURL(url)
+	if err != nil {
+		e = Join(e, "image.Decode()")
+		return
+	}
+	r, e = isImageNude(img)
+	if e != nil {
+		e = Join(e, "isImageNude()")
+	}
+	return
+}
+
 func IsImageNude(data *[]byte) (r bool, e error) {
 	var img image.Image
 	img, _, e = image.Decode(bytes.NewReader(*data))
