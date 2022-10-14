@@ -1,7 +1,6 @@
 package validate_nudity
 
 import (
-	"errors"
 	"fmt"
 	"math"
 	"os"
@@ -14,7 +13,8 @@ var __traceContinue_ = []string{"/usr/local/", "/github.com/"}
 
 // Join error description
 func Join(e error, errMsg string) error {
-	return errors.New(f() + ": " + errMsg + "\n" + e.Error())
+	_, err := fmt.Printf(f() + ": " + errMsg + "\n" + e.Error())
+	return err
 }
 
 // PanicTrace and archive to log

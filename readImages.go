@@ -1,7 +1,7 @@
 package validate_nudity
 
 import (
-	"errors"
+	"fmt"
 	"image"
 	"io"
 	"net/http"
@@ -20,7 +20,7 @@ func loadImageFromURL(URL string) (img image.Image, err error) {
 	}(response.Body)
 
 	if response.StatusCode != 200 {
-		err = Join(errors.New("received non 200 response code"), "load img")
+		_, err = fmt.Printf("received non 200 response code %v, in loadImageFromURL: %v", response.StatusCode, "load img")
 		return
 	}
 
