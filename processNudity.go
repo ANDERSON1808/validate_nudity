@@ -11,12 +11,13 @@ import (
 func IsImageNudeUrl(url string) (r bool, e error) {
 	img, err := loadImageFromURL(url)
 	if err != nil {
-		e = Join(e, "image.Decode()")
+		e = NewError("fail load url img", "image.Decode()")
 		return
 	}
 	r, e = isImageNude(img)
 	if e != nil {
-		e = Join(e, "isImageNude()")
+		e = NewError("error parsing image", "func isImageNude")
+		return
 	}
 	return
 }
@@ -25,12 +26,13 @@ func IsImageNude(data *[]byte) (r bool, e error) {
 	var img image.Image
 	img, _, e = image.Decode(bytes.NewReader(*data))
 	if e != nil {
-		e = Join(e, "image.Decode()")
+		e = NewError("error decoding native image", "image.Decode()")
 		return
 	}
 	r, e = isImageNude(img)
 	if e != nil {
-		e = Join(e, "isImageNude()")
+		e = NewError("error parsing image", "func isImageNude")
+		return
 	}
 	return
 }
