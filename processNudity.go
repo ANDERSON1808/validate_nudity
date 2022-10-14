@@ -11,7 +11,7 @@ import (
 func IsImageNudeUrl(url string) (r bool, e error) {
 	img, err := loadImageFromURL(url)
 	if err != nil {
-		e = NewError("fail load url img", "image.Decode()")
+		e = NewError("fail load url img", err)
 		return
 	}
 	r, e = isImageNude(img)
